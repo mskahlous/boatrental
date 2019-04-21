@@ -14,15 +14,29 @@ public class Boat {
     @Column
     private int boatNumber;
     @Column
-    private int boatNumberOfSeats;
+    private int boatNumberOfSeats =10 ;
     @Column
     private double hourPrice;
 
+    private double chargingTime;
+
+    public String getStatus() { return status;}
+
+    public void setStatus(String status) { this.status = status; }
+
+    @Column (name = "status")
+    private String status = "";
+
+
+    public double getChargingTime() { return chargingTime; }
+
+    public void setChargingTime(double chargingTime) { this.chargingTime = chargingTime; }
+
+    public double getHourPrice() {return hourPrice; }
+    public void setHourPrice(double hourPrice) { this.hourPrice = hourPrice;}
+
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
-
-    public double getTripPrice() { return hourPrice; }
-    public void setTripPrice(double tripPrice) {this.hourPrice = tripPrice; }
 
     public int getBoatNumberOfSeats() { return boatNumberOfSeats; }
     public void setBoatNumberOfSeats(int boatNumberOfSeats) { this.boatNumberOfSeats = boatNumberOfSeats; }

@@ -1,15 +1,12 @@
 package com.molveno.boatrental.boatrental.Guests;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 
 @Entity
 public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Access(AccessType.PROPERTY)
-    @Column
+
     private long id;
     @Column (name = "name")
     private String name;
