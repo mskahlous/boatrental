@@ -16,9 +16,11 @@
     <!--fonts-->
     <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-
-
     <!--//fonts-->
+    <!--    timepicker-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css" />
+
+
 </head>
 <body>
 <!--background-->
@@ -54,15 +56,10 @@
                 <label><i aria-hidden="true"></i> Start Time :</label>
                 <input type="text" name="Time" class="timepicker form-control" value="Hrs:Min">
             </div>
-
-            <!--<div class="form-date-w3-agileits">-->
-                <!--<label><i class="fa fa-calendar" aria-hidden="true"></i> Departure Date :</label>-->
-                <!--<input  id="datepicker2" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">-->
+            <!--<div class="form-time-w3layouts">-->
+                <!--<label><i aria-hidden="true"></i> End Time :</label>-->
+                <!--<input type="text" name="Time" class="timepicker form-control" value="Hrs:Min">-->
             <!--</div>-->
-            <div class="form-time-w3layouts">
-                <label><i aria-hidden="true"></i> End Time :</label>
-                <input type="text" name="Time" class="timepicker form-control" value="Hrs:Min">
-            </div>
             <div class="form-left-agileits-w3layouts bottom-w3ls">
                 <label><i  aria-hidden="true"></i> Choose a Boat :</label>
                 <select class="form-control">
@@ -95,6 +92,13 @@
             <div class="make">
                 <input type="submit" value="Make a Trip">
             </div>
+            <div class="form-time-w3layouts">
+                <label><i aria-hidden="true"></i> End Time :</label>
+                <input type="text" name="Time" class="timepicker2 form-control" value="Hrs:Min">
+            </div>
+            <div class="endTrip">
+                <input type="submit" value="End a Trip">
+            </div>
         </form>
     </div>
 </div>
@@ -104,10 +108,27 @@
 <!--</div>-->
 <!--//copyright-->
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="js/wickedpicker.js"></script>
-<script type="text/javascript">
-				$('.timepicker').wickedpicker({twentyFour: false});
-			</script>
+<!--<script type="text/javascript" src="js/wickedpicker.js"></script>-->
+<!--<script type="text/javascript">-->
+				<!--$('.timepicker').wickedpicker({twentyFour: false});-->
+			<!--</script>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
+
+<script  type="text/javascript">
+         $('.timepicker').timepicker({
+        'disableTimeRanges': [
+        ['6pm', '11:59pm'],
+        ['12am', '9am']
+        ]
+        });
+         $('.timepicker2').timepicker({
+        'disableTimeRanges': [
+        ['6:29pm', '11:59pm'],
+        ['12am', '9:30am']
+        ]
+        });
+</script>
 
 
 <!-- Calendar -->
@@ -115,7 +136,8 @@
 <script src="js/jquery-ui.js"></script>
 <script>
 						  $(function() {
-							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker({ minDate: -0 }
+);
 						  });
 				  </script>
 <!-- //Calendar -->

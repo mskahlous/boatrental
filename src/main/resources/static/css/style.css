@@ -143,6 +143,7 @@ h3.tittle.reserve {
     background: #a71930;
     font-family: 'Roboto', sans-serif;
 }
+
 .make input[type=submit]:hover {
     background: none;
     transition: 0.5s all ease;
@@ -151,6 +152,32 @@ h3.tittle.reserve {
     -o-transition: 0.5s all ease;
     -ms-transition: 0.5s all ease;
 }
+
+.endTrip {
+    margin: 1em auto 0;
+    text-align: center;
+}
+.endTrip input[type=submit] {
+    color: #FFFFFF;
+    margin-top: 3em;
+    padding: 9px 30px;
+    font-size: 1.04em;
+    cursor: pointer;
+    border: 2px solid #a71930;
+    outline: none;
+    background: #a71930;
+    font-family: 'Roboto', sans-serif;
+}
+
+.endTrip input[type=submit]:hover {
+    background: none;
+    transition: 0.5s all ease;
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -o-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+}
+
 .arrows-reserve{
 	    position:relative;
 		color:#EFA52C;
@@ -229,6 +256,9 @@ h3.tittle.reserve {
 	.make input[type=submit] {
 		margin-top: 2em;
 	}
+	.endTrip input[type=submit] {
+    	margin-top: 2em;
+    }
 }
 @media(max-width:1080px){
 	.bg-agile {
@@ -242,6 +272,11 @@ h3.tittle.reserve {
 		padding: 7px 24px;
 		font-size: 1.03em;
 	}
+	.endTrip input[type=submit] {
+    	margin-top: 2.5em;
+    	padding: 7px 24px;
+    	font-size: 1.03em;
+    }
 	.copy.w3ls {
 		margin: 2.5em 0em;
 	}
@@ -270,6 +305,9 @@ h3.tittle.reserve {
 	.make input[type=submit] {
 		font-size: 1em;
 	}
+	.endTrip input[type=submit] {
+    	margin-top: 2.2em;
+    }
 }
 @media(max-width:900px){
 	.book-reservation select.form-control {
@@ -307,6 +345,9 @@ h3.tittle.reserve {
 	.make input[type=submit] {
 		margin-top: 2.2em;
 	}
+	.endTrip input[type=submit] {
+    	margin-top: 2.2em;
+    }
 	.book-reservation input[type="text"], .book-reservation input[type="date"], .book-reservation input[type="time"], .book-reservation input[type="email"] {
 		margin-bottom: 1.1em;
 	}
@@ -352,6 +393,9 @@ h3.tittle.reserve {
 		padding: 5px 16px;
 		font-size: .9em;
 	}
+	.endTrip input[type=submit] {
+    	margin-top: 1em;
+    }
 	h1 {
 		font-size: 20px;
 		letter-spacing: 2px;
@@ -388,6 +432,9 @@ h3.tittle.reserve {
 	.make input[type=submit] {
 		margin-top: 1.5em;
 	}
+	.endTrip input[type=submit] {
+    	margin-top: 1em;
+    }
 	.book-reservation select.form-control {
 		width: 98%;
 	}
@@ -433,6 +480,9 @@ h3.tittle.reserve {
 	.make input[type=submit] {
 		margin-top: 1em;
 	}
+	.endTrip input[type=submit] {
+    	margin-top: 1em;
+    }
 	.copy.w3ls {
 		margin: 1em 1.5em;
 	}
