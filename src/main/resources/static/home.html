@@ -1,81 +1,217 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <title>Trip reservation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Tourists Reservation Form template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs Sign up Web Templates,
  Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design">
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+
+
+
     </script>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- Custom Theme files -->
     <link href="css/font.css" rel="stylesheet">
-    <link href="css/wickedpicker.css" rel="stylesheet" type='text/css' media="all" />
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/wickedpicker.css" rel="stylesheet" type='text/css' media="all"/>
+    <link href="css/style.css" rel='stylesheet' type='text/css'/>
     <!--fonts-->
     <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
     <!--//fonts-->
-    <!--    timepicker-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css"/>
+
+    <script>
+
+function getInProgressTripsBoats(){
+<!--alert("Test");-->
+$.ajax({
+        url:"http://localhost:8080/get-InProgressTrips",
+
+        type: "get",
+        success: function(data){
+            $.each(data,function(key,obj){
 
 
+
+                var s1="<option value="+obj.id+">"+ obj.boat.boatNumber +" </option>";
+                $(s1).appendTo('#Boats');
+
+            })}
+        });
+
+
+
+}
+                function Guest(){
+
+
+            var guestName = $("#1").val();
+            var phoneNumber = $("#2").val();
+            var idType = $("#3").val();
+            var idNumber = $("#4").val();
+
+                var object ={
+
+                "guest" :{
+                "name":guestName,
+                "idType":idType,
+                "idNumber":idNumber,
+                "phoneNumber":phoneNumber}
+            };
+
+            var jsonObject=JSON.stringify(object);
+
+            console.log(jsonObject);
+
+            $.ajax({
+
+            url:"/trip",
+            type:"post",
+            data: jsonObject,
+            contentType:"application/json;",
+
+
+        })
+   }
+function addBoat(){
+
+
+            var boatNumber = $("#1").val();
+            var seatsNumber = $("#2").val();
+            var price = $("#3").val();
+            var chargeTime = $("#4").val();
+
+                var object ={
+                "boatNumber":boatNumber,
+                "boatNumberOfSeats":seatsNumber,
+                 "hourPrice":price,
+                 "chargingTime":chargeTime
+            };
+
+            var jsonObject=JSON.stringify(object);
+
+            $.ajax({
+
+            url:"/add-boat",
+            type:"post",
+            data: jsonObject,
+            contentType:"application/json;",
+            dataType:"application/json",
+            success: function(data){
+            if(data===true){
+            alert("You have added a boat !!")}
+            else {
+            alert("Please choose different boat number")
+            }
+            }
+
+        })
+   }
+
+
+  function getAvBoat(){
+
+    $.ajax({
+        url:"http://localhost:8080/get-ava-boats",
+
+        type: "get",
+        success: function(data){
+            alert("you have"+" "+ data +" "+"Boats ")
+
+
+         }
+     })
+  }
+
+    function endTrip(){
+
+    var id=$("#Boats option:selected").val();
+    var object ={
+               "id":id
+            };
+            var jsonObject=JSON.stringify(object);
+    $.ajax({
+        url:"http://localhost:8080/end-trip",
+       data:jsonObject,
+       contentType:"application/json",
+        type: "post",
+        success: function(data){
+        alert("Guest name :"+ " "+ data.guest.name +" "+"Trip cost:"+ data.cost)
+         }
+     })
+  }
+
+
+
+
+
+    </script>
 </head>
+
 <body>
 <!--background-->
 <h1> Trip Reservation Form </h1>
 <div class="bg-agile">
+    <div class="switch-field">
+        <input type="radio" onclick="getAvBoat()" id="start" value="startTrip" name="switch">
+        <label for="start">Start Trip</label>
+        <input type="radio" onclick="getInProgressTripsBoats()" id="end" value="endTrip1" name="switch">
+        <label for="end">End Trip</label>
+    </div>
     <div class="book-reservation">
-        <form action="#" method="post">
+        <!--<form action="#"  id="endTrip" style="display: none;">-->
+            <!--<div class="form-left-agileits-w3layouts bottom-w3ls">-->
+                <!--<label><i aria-hidden="true"></i> Choose a Boat Number:</label>-->
+                <!--<select id="Boats" class="form-control">-->
+
+
+                <!--</select>-->
+            <!--</div>-->
+            <!--<div class="endTrip">-->
+                <!--<input type="submit"  onclick="endTrip()" value="End a Trip">-->
+            <!--</div>-->
+        <!--</form>-->
+        <form id="endTrip1" style="display: none;">
+            <div class="form-left-agileits-w3layouts bottom-w3ls">
+                <label><i aria-hidden="true"></i> Choose a Boat Number:</label>
+                <select id="Boats" class="form-control">
+
+
+                </select>
+            </div>
+            <div class="endTrip">
+                <input type="submit" onsubmit="" onclick="endTrip()" value="End a Trip">
+            </div>
+        </form>
+
+        <form id="startTrip" action="#" style="display: none">
             <div class="form-date-w3-agileits">
                 <label><i aria-hidden="true"></i> Guest Name :</label>
-                <input type="text" name="name" placeholder="Guest Name" required=""/>
+                <input type="text" id="1" name="name" placeholder="Guest Name" required=""/>
             </div>
             <div class="form-date-w3-agileits">
                 <label><i aria-hidden="true"></i> Phone Number :</label>
-                <input type="text" name="name" placeholder="Phone Number" required=""/>
+                <input type="text" id="2" name="name" placeholder="Phone Number" required=""/>
             </div>
             <div class="form-date-w3-agileits">
                 <label><i aria-hidden="true"></i> ID Type :</label>
-                <select class="form-control">
-                    <option>ID </option>
-                    <option>Passport </option>
-                    <option>Driving Licence </option>
+                <select id="3" class="form-control">
+                    <option>ID</option>
+                    <option>Passport</option>
+                    <option>Driving Licence</option>
                 </select>
             </div>
             <div class="form-date-w3-agileits">
                 <label><i aria-hidden="true"></i> ID Number :</label>
-                <input type="text" name="name" placeholder="ID Number" required=""/>
+                <input type="text" id="4" name="name" placeholder="ID Number" required=""/>
             </div>
-            <div class="form-date-w3-agileits">
-                <label><i  aria-hidden="true"></i> Trip Date :</label>
-                <input  id="datepicker1" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
-            </div>
-            <div class="form-time-w3layouts">
-                <label><i aria-hidden="true"></i> Start Time :</label>
-                <input type="text" name="Time" class="timepicker form-control" value="Hrs:Min">
-            </div>
-            <!--<div class="form-time-w3layouts">-->
-                <!--<label><i aria-hidden="true"></i> End Time :</label>-->
-                <!--<input type="text" name="Time" class="timepicker form-control" value="Hrs:Min">-->
-            <!--</div>-->
-            <div class="form-left-agileits-w3layouts bottom-w3ls">
-                <label><i  aria-hidden="true"></i> Choose a Boat :</label>
-                <select class="form-control">
-                    <option>Electrical </option>
-                    <!--<option>Standard Double Room</option>-->
-                    <!--<option>Standard Family Room</option>-->
-                    <!--<option>Garden Family Room</option>-->
-                    <!--<option>Deluxe Double Room</option>-->
-                    <!--<option>Executive Junior Suite</option>-->
-                    <!--<option>Maisonette</option>-->
-                </select>
-            </div>
+
             <div class="form-left-agileits-w3layouts">
                 <label><i aria-hidden="true"></i> No.of People :</label>
                 <select class="form-control">
-                    <option>Persons</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -88,34 +224,19 @@
                     <option>10</option>
                 </select>
             </div>
-            <div class="clear"> </div>
+            <div class="clear"></div>
             <div class="make">
-                <input type="submit" value="Make a Trip">
-            </div>
-            <div class="form-time-w3layouts">
-                <label><i aria-hidden="true"></i> End Time :</label>
-                <input type="text" name="Time" class="timepicker2 form-control" value="Hrs:Min">
-            </div>
-            <div class="endTrip">
-                <input type="submit" value="End a Trip">
+                <input type="submit" onclick="Guest()" value="Make a Trip">
             </div>
         </form>
     </div>
 </div>
-<!--copyright-->
-<!--<div class="copy w3ls">-->
-    <!--<p>Copyright 2017 Tourists Reservation Form . All Rights Reserved  | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>-->
-<!--</div>-->
-<!--//copyright-->
+
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-<!--<script type="text/javascript" src="js/wickedpicker.js"></script>-->
-<!--<script type="text/javascript">-->
-				<!--$('.timepicker').wickedpicker({twentyFour: false});-->
-			<!--</script>-->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
 
-<script  type="text/javascript">
+<script type="text/javascript">
          $('.timepicker').timepicker({
         'disableTimeRanges': [
         ['6pm', '11:59pm'],
@@ -128,19 +249,26 @@
         ['12am', '9:30am']
         ]
         });
+        $(document).ready(function(){
+            $('input[type="radio"]').click(function(){
+                var switchValue = $(this).val();
+                $("form").hide();
+                $("#"+switchValue).show();
+            });
+        });
+
+
 </script>
-
-
-<!-- Calendar -->
-<link rel="stylesheet" href="css/jquery-ui.css" />
+<link rel="stylesheet" href="css/jquery-ui.css"/>
 <script src="js/jquery-ui.js"></script>
 <script>
-						  $(function() {
-							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker({ minDate: -0 }
+		$(function() {
+		  $( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker({ minDate: -0 }
 );
-						  });
-				  </script>
-<!-- //Calendar -->
+		});
+
+
+</script>
 
 
 </body>

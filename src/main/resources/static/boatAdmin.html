@@ -1,25 +1,137 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="css/boatAdmin.css">
+    <link rel="stylesheet" type="text/css" href="css/delete.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="dist/jquery.scrollUp.js"></script>-->
+    <script>
+$(document).ready(function(){
+
+ $.ajax({
+        url:"http://localhost:8080/get-boats",
+        type: "get",
+        success: function(data){
+            $.each(data,function(key,obj){
+                var s1="<option value="+obj.id+">"+ obj.boatNumber +" </option>";
+                $(s1).appendTo('#boat');
+                $(s1).appendTo('#boat1');
+            })}
+        });
+ })
+
+        function addBoat(){
+
+
+            var boatNumber = $("#1").val();
+            var seatsNumber = $("#2").val();
+            var price = $("#3").val();
+            var chargeTime = $("#4").val();
+
+                var object ={
+                "boatNumber":boatNumber,
+                "boatNumberOfSeats":seatsNumber,
+                "hourPrice":price,
+                "chargingTime":chargeTime
+            };
+
+            var jsonObject=JSON.stringify(object);
+
+            $.ajax({
+
+            url:"/add-boat",
+            type:"post",
+            data: jsonObject,
+            contentType:"application/json;",
+            success: function(data){
+            if(data===true){
+            alert("You have added a boat !!")}
+            else {
+            alert("Please choose different boat number")
+            }
+            }
+
+        })
+   }
+
+        function blockBoat(){
+
+
+
+        var name = $("#2").val();
+        var id = $("#boat option:selected").val();
+
+        var object ={
+        "id":id,
+        "name":boatNumber
+
+        };
+
+        var jsonObject=JSON.stringify(object);
+
+        $.ajax({
+
+        url:"http://localhost:8080/block-boat",
+        type:"post",
+        data: jsonObject,
+        contentType:"application/json;",
+        success: alert("Block success"),
+        dataType: "application/json"
+
+
+
+
+
+ })
+
+    }
+
+
+
+
+
+
+    </script>
+    <title>Admin</title>
 </head>
 <div class="container">
-    <form id="contact" action="" method="post">
-        <h3>Add Boat Form</h3>
-        <fieldset>
-            <input placeholder="Boat number" type="text" tabindex="1" required autofocus>
-        </fieldset>
-        <fieldset>
-            <input placeholder="Seats" type="number" tabindex="2" required>
-        </fieldset>
-        <fieldset>
-            <input placeholder="Price)" type="number" tabindex="3" required>
-        </fieldset>
-        <fieldset>
-            <input placeholder="Charging time" type="number" tabindex="4" required>
-        </fieldset>
-        <fieldset>
-            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
-        </fieldset>
-        <a href="home.html">Go to home</a>
-            </form>
+    <div>
+        <form id="contact">
+            <h3>Add Boat Form</h3>
+            <fieldset>
+                <input id="1" placeholder="Boat number" min="1" type="number" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+                <input id ="2" placeholder="Seats" min="1" type="number" tabindex="2" required>
+            </fieldset>
+            <fieldset>
+                <input id="3" placeholder="Price" min="1" type="number" tabindex="3" required>
+            </fieldset>
+            <!--<fieldset>-->
+                <!--<input id="4" placeholder="Charging time" min="1" type="number" tabindex="4" required>-->
+            <!--</fieldset>-->
+            <fieldset>
+                <button  type="submit" onclick="addBoat()" id="contact-submit" >
+                    Submit
+                </button>
+            </fieldset>
+            <!--<button type="button" onclick="addBoat()">Add </button>-->
+            <a href="home.html">Go to home</a>
+        </form>
+    </div>
+    <div>
+        <form id="contact2" action="">
+            <h3>Delete</h3>
+            <select id="boat1"></select>
+            <fieldset>
+                <button name="delete" type="submit" onclick="deleteBoat()">Delete</button>
+            </fieldset>
+            <!--<select id="boat"></select>-->
+            <!--&lt;!&ndash;<fieldset>&ndash;&gt;-->
+                <!--&lt;!&ndash;<button name="block" type="submit" id="blockB">Block</button>&ndash;&gt;-->
+            <!--&lt;!&ndash;</fieldset>&ndash;&gt;-->
+            <a href="home.html">Go to home</a>
+        </form>
+    </div>
 </div>
+</html>

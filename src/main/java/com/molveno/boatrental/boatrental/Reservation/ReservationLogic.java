@@ -19,7 +19,7 @@ public class ReservationLogic {
     BoatRepository boatRepository;
 
     public static   void statTrip(Reservation reservation,List<Reservation> reservations,List<Boat> boats1) {
-
+//
         List<Boat> usedBoats = new ArrayList<>();
 
 //        usedBoats now
@@ -31,12 +31,22 @@ public class ReservationLogic {
 
         }
 
+
+
+
 //        Check available boats
         boats1.removeIf((boat -> (usedBoats.contains(boat))));
         if (boats1.isEmpty()) {
             System.out.println("No Boats Available");
         }
 //        Start trip
+
+        boats1.removeIf(boat -> boat.getStatus().equals("Blocked"));
+
+
+
+
+System.out.println(boats1);
         for (Boat b : boats1){
             if (b.getBoatNumberOfSeats()>=reservation.getNumOfPerson() ){
                 reservation.setBoat(b);
@@ -47,6 +57,7 @@ public class ReservationLogic {
         }
 
     }
+
 //    Stop trip
 
     public static void stopTrip (Reservation reservation){
@@ -62,10 +73,19 @@ public class ReservationLogic {
         double duration = endTimeReservation - startTimeReservation ;
         reservation.setDuration(duration);
 //        Get trip cost
-        double tripCost = duration * reservation.getCost();
+        double tripCost = duration * reservation.getBoat().getHourPrice();
         tripCost =tripCost*100;
         tripCost=Math.round(tripCost);
         tripCost=tripCost/100;
         reservation.setCost(tripCost);
     }
+
+
+    public static List<Reservation> getInProgressTrips(List<Reservation> reservations){
+        reservations.removeIf(reservation -> (!reservation.getStatus().equals("In Progress")));
+
+        return reservations;
+
+    }
+
 }

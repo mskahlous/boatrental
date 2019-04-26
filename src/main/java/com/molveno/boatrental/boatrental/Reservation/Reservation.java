@@ -20,7 +20,7 @@ public class Reservation {
     @Column (name = "endreservationtime")
     private LocalDateTime endReservationTime;
     @Column (name = "tripcost")
-    private double cost = 10;
+    private double cost ;
     @Column (name = "status")
     private String status = "";
     @Column (name = "Duration")
@@ -34,7 +34,7 @@ public class Reservation {
         this.duration = duration;
     }
 
-    private int numOfPerson =5;
+    private int numOfPerson =0;
 
     public int getNumOfPerson() {
         return numOfPerson;

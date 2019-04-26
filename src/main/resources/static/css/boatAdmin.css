@@ -35,14 +35,11 @@ body {
 #contact button[type="submit"] {
   font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
 }
-#contact button[type="submit"] {
-  font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
-}
 
 #contact {
   background: #F9F9F9;
   padding: 25px;
-  margin: 150px 0;
+  margin: 50px 0px 25px 0px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
@@ -101,7 +98,7 @@ fieldset {
   cursor: pointer;
   width: 100%;
   border: none;
-  background: #00CED1;
+  background: #40E0D0;
   color: #FFF;
   margin: 0 0 5px;
   padding: 10px;

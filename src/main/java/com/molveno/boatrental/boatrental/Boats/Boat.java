@@ -9,16 +9,14 @@ public class Boat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Access(AccessType.PROPERTY)
     private long id;
-    @Column
-    private String boatType;
-    @Column
+//    private String boatType;
     private int boatNumber;
     @Column
     private int boatNumberOfSeats =10 ;
     @Column
     private double hourPrice;
 
-    private double chargingTime;
+//    private double chargingTime;
 
     public String getStatus() { return status;}
 
@@ -28,9 +26,9 @@ public class Boat {
     private String status = "";
 
 
-    public double getChargingTime() { return chargingTime; }
-
-    public void setChargingTime(double chargingTime) { this.chargingTime = chargingTime; }
+//    public double getChargingTime() { return chargingTime; }
+//
+//    public void setChargingTime(double chargingTime) { this.chargingTime = chargingTime; }
 
     public double getHourPrice() {return hourPrice; }
     public void setHourPrice(double hourPrice) { this.hourPrice = hourPrice;}
@@ -40,9 +38,9 @@ public class Boat {
 
     public int getBoatNumberOfSeats() { return boatNumberOfSeats; }
     public void setBoatNumberOfSeats(int boatNumberOfSeats) { this.boatNumberOfSeats = boatNumberOfSeats; }
-
-    public String getBoatType() { return boatType; }
-    public void setBoatType(String boatType) { this.boatType = boatType; }
+//
+//    public String getBoatType() { return boatType; }
+//    public void setBoatType(String boatType) { this.boatType = boatType; }
 
     public int getBoatNumber() { return boatNumber; }
     public void setBoatNumber(int boatNumber) { this.boatNumber = boatNumber; }

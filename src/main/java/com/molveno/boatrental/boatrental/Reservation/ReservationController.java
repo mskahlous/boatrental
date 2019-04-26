@@ -2,6 +2,7 @@ package com.molveno.boatrental.boatrental.Reservation;
 
 import com.molveno.boatrental.boatrental.Boats.Boat;
 import com.molveno.boatrental.boatrental.Boats.BoatRepository;
+import com.molveno.boatrental.boatrental.Guests.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,8 @@ public class ReservationController {
     ReservationRepository reservationRepository;
     @Autowired
     BoatRepository boatRepository;
+    @Autowired
+    GuestRepository guestRepository;
 
     @RequestMapping(value = "/get-reservation", method = RequestMethod.GET)
     public List<Reservation> getReservation() {
@@ -45,22 +48,34 @@ public class ReservationController {
         return reservationRepository.save(reservation1);
     }
 
-    @RequestMapping(value = "/trip", method = RequestMethod.POST,consumes = "application/json")
+    @RequestMapping(value = "/trip", method = RequestMethod.POST, consumes = "application/json")
     public void startTrip(@RequestBody Reservation reservation) {
         List<Reservation> reservations = reservationRepository.findAll();
-         List<Boat> boats =boatRepository.findAll();
-         ReservationLogic.statTrip(reservation,reservations,boats);
-         reservationRepository.save(reservation);
+        List<Boat> boats = boatRepository.findAll();
+        guestRepository.save(reservation.getGuest());
+        ReservationLogic.statTrip(reservation, reservations, boats);
+        reservationRepository.save(reservation);
 
     }
-    @RequestMapping (value = "/end-trip", method = RequestMethod.POST,consumes = "application/json")
-    public void endTrip(@RequestBody Reservation reservation){
+
+    @RequestMapping(value = "/end-trip", method = RequestMethod.POST, consumes = "application/json")
+    public Reservation endTrip(@RequestBody Reservation reservation) {
         System.out.println(reservation.getId());
 
         Reservation reservation1 = reservationRepository.findById(reservation.getId());
         System.out.println(reservation1.getStartReservationTime());
-       ReservationLogic.stopTrip(reservation1);
-       reservationRepository.save(reservation1);
+        ReservationLogic.stopTrip(reservation1);
+        reservationRepository.save(reservation1);
+        return reservation1;
     }
+
+    @RequestMapping(value = "/get-InProgressTrips", method = RequestMethod.GET)
+    public List<Reservation> getInProgressTrips() {
+        List<Reservation> reservations = reservationRepository.findAll();
+
+        return ReservationLogic.getInProgressTrips(reservations);
+    }
+
+
 }
 
